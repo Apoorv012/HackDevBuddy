@@ -6,6 +6,8 @@ function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
+  console.log(webgazer);
+
   return (
     <>
       <h3 style={{ textAlign: "center", marginTop: 20 }}>Webcam</h3>
