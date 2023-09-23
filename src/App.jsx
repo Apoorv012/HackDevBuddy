@@ -15,26 +15,23 @@ function App() {
       },
       scale: 0.8,
     });
+
     setInterval(() => {
       detect(net);
-    }, 100);
+    }, 1000);
   };
 
   const detect = async (net) => {
-    console.log(webcamRef.current);
+    const currWebcamRef = webcamRef.current;
     if (
-      typeof webcamRef.current !== "undefined" &&
-      typeof webcamRef.current !== null &&
-      typeof webcamRef.current.video.readyState === 4
+      typeof currWebcamRef !== "undefined" &&
+      typeof currWebcamRef !== null &&
+      currWebcamRef?.video.readyState === 4
     ) {
       // Video Properties
-      const video = webcamRef.current.video;
-      const videoWidth = webcamRef.current.video.videoWidth;
-      const videoHeight = webcamRef.current.video.videoHeight;
-
-      // Set Webcam dimensions
-      webcamRef.current.video.videoWidth = videoWidth;
-      webcamRef.current.video.videoHeight = videoHeight;
+      const video = await currWebcamRef.video;
+      const videoWidth = await currWebcamRef.video.videoWidth;
+      const videoHeight = await currWebcamRef.video.videoHeight;
 
       // Set canvas dimensions
       canvasRef.current.Width = videoWidth;
