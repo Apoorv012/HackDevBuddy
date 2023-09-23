@@ -1,0 +1,22 @@
+**Requirements**:
+
+- Proctored exam
+  - Video, Audio, and Screen share would be recorded for 14 days.
+  - Video Monitoring ( Face turn, Looking somewhere else )
+  - Microphone Monitoring ( Someone else in room )
+  - Screen sharing ( Screen should not be changed )
+- Warning Detection System
+  - Threshold frequency should be set, and if it exceeds, it will be disqualified.
+  - In case, someone challenges us, we may check it manually.
+- User Registration and Profile
+  - Create account
+  - Password reset
+  - Pfp
+- List of Hackathons:
+  - Option for hackathons to set their test
+- Types of tests:
+  - MCQ based
+  - Text / Para based
+  - Upload a pic
+- Miscellaneous
+  - Nothing rn
