@@ -6,6 +6,8 @@ function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
+  webgazer.saveDataAcrossSessions(false);
+
   webgazer
     .setGazeListener(function (data, elapsedTime) {
       if (data == null) {
@@ -13,7 +15,7 @@ function App() {
       }
       var xprediction = data.x; //these x coordinates are relative to the viewport
       var yprediction = data.y; //these y coordinates are relative to the viewport
-      console.log(elapsedTime); //elapsed time is based on time since begin was called
+      console.log(data.x, data.y); //elapsed time is based on time since begin was called
     })
     .begin();
 
