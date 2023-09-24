@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import signupBG from "../images/signupBG.png";
+import firebaseApp from "../firebase_configs";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { Message } from "@mui/icons-material";
 
 function Register() {
   const navigate = useNavigate();
@@ -14,6 +17,8 @@ function Register() {
   const [dateValue, onDateChange] = useState(new Date());
   const [date, setDate] = useState(new Date());
 
+  const auth = getAuth(firebaseApp);
+
   const register = async (e) => {
     e.preventDefault();
     try {
@@ -23,16 +28,28 @@ function Register() {
           setError("");
         }, 2000);
       } else {
-        const res = await publicRequest.post("/auth/register", {
-          username,
-          email,
-          password,
-        });
-        console.log(res.data);
-        setMessage("User Registered");
-        setTimeout(() => {
-          navigate("/login");
-        }, 2000);
+        // Using Firebase for authentication
+        console.log(email);
+
+        createUserWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log(user);
+            setMessage("User Created Successfully");
+            setTimeout(() => {
+              setMessage("");
+            }, 2000);
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            setError(errorMessage);
+            setTimeout(() => {
+              setError("");
+            }, 2000);
+            // ..
+          });
       }
     } catch (error) {
       setError(error.response.data.message);
@@ -50,27 +67,35 @@ function Register() {
           <Form>
             <Input
               placeholder="Username"
+              required
               onChange={(e) => setUsername(e.target.value)}
             />
-            <Input type="email" placeholder="Email" />
+            <Input
+              type="email"
+              required
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
             <Input
               type="password"
+              required
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
             />
             <Input
               type="password"
+              required
               placeholder="Confirm Password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setConfirmPass(e.target.value)}
             />
-            <Input type="Gender" placeholder="Gender" />
-            <Input type="date" placeholder="Date of Birth" />
+            <Input type="Gender" placeholder="Gender" required />
+            <Input type="date" placeholder="Date of Birth" required />
             <Extra>
               <Links>
                 <input type="checkbox" /> Remember passworod{" "}
               </Links>
             </Extra>
-            <Button onClick={(e) => Register(e)}>SIGN UP</Button>
+            <Button onClick={(e) => register(e)}>SIGN UP</Button>
 
             {error && <Error>{error}</Error>}
 
