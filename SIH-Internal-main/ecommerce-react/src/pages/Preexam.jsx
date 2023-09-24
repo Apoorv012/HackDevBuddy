@@ -1,19 +1,16 @@
 import React from 'react'
 import { useState } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import {publicRequest} from '../Axios';
 import {useDispatch, useSelector} from 'react-redux'
 import {loginFailure,loginStart, loginSuccess} from '../redux/userRedux'
-import loginBG from '../images/loginBG.png'
+import preexam from '../images/preexam.png'
 
-
-function Login() {
+function Preexam() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const {isFetching, error} = useSelector((state)=> state.user)
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const login = async (e)=>{
         e.preventDefault();
@@ -31,20 +28,37 @@ function Login() {
     }
   return (
     <>
-        <WrapContainer src={loginBG}>
+        <WrapContainer>
+            <Wrapper2>
+            <Title2>Name Here</Title2>
+            <Image src={preexam}>
+
+            </Image>
+            </Wrapper2>
             <Wrapper>
-                <Title>Log In</Title>
+                <Title>Select the Following for Exam</Title>
                 <Form>
-                    <Input placeholder='Userame' onChange={(e)=> setUsername(e.target.value)}/>
-                    <Input type="password" placeholder='Password' onChange={(e)=> setPassword(e.target.value)}/>
-                    <Extra><Links><input type="checkbox"  /> Remember password                      </Links>
-                    <Links>Forgot passoword?</Links>
-                    </Extra>
-                    <Button onClick={(e)=> login(e)} disabled={isFetching}>LOGIN</Button>
+                <Select>
+                    <option value="" disabled selected>Level of Experience in Coding(Select) </option>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                </Select>
+                <Select>
+                <option value="" disabled selected>Language(Select) </option>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                </Select>
+                <Select>
+                <option value="" disabled selected>Role(Frontend/Backend/ any other)(Select) </option>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                </Select>
+                
+                    <Button onClick={(e)=> login(e)} disabled={isFetching}>SUBMIT</Button>
 
                     {error && <Error>{error}</Error>}
                     
-                    <Text>Don't have an account? <Links onClick = {(e)=> navigate('/register')}>SignUp</Links></Text>
+                    
                 </Form>
             </Wrapper>
         </WrapContainer>
@@ -52,36 +66,70 @@ function Login() {
   )
 }
 
-export default Login
+export default Preexam
 
 
-
-const WrapContainer = styled.div`
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    width:100vw;
-    height:100vh;
-    background-image: url(${props => props?.src});
-    background-size: cover;
-`
-const Wrapper = styled.div`
-    background-color:white ;
-    width:30vw ;
+const Image = styled.div`
+   
+    width:20vw ;
     padding:20px ;
     
-    height: 80%;
-
+    height: 70%;
+    background-image: url(${props => props?.src});
+    background-size: fit;
+    
     justify-content:center;
     border-radius:5%;
     
+     
+    margin-left:10%;
+    margin-top: 10%;
+    
+`
+const WrapContainer = styled.div`
+    display:flex;
+    justify-content:center;
+    
+    width:100vw;
+    height:100vh;
+    background-color:  #0E21A0;
+   
+    padding-top: 5%;
+    
+`
+const Wrapper2 = styled.div`
+   
+    width:35vw ;
+    padding:20px ;
+    
+    height: 75%;
+    
+    justify-content:center;
+    border-radius:5%;
+    margin-right:10%;
+    
+    margin-left:2%;
+    
+`
+const Wrapper = styled.div`
+    background-color:white ;
+    width:35vw ;
+    padding:20px ;
+    
+    height: 75%;
+
+    justify-content:center;
+    border-radius:5%;
+    margin-right:-40%;
+    margin-right:2%;
+    
 `
 const Title = styled.h1`
-    margin-top:10%;
+    margin-top:6%;
     margin-bottom:10% ;
-    font-weight:600;
-    font-size:50px ;
-    letter-spacing:2px ;
+    font-weight:630;
+    font-size:40px ;
+    letter-spacing:1px ;
     text-align:center;
 `
 const Form = styled.form`
@@ -91,7 +139,7 @@ const Form = styled.form`
     align-items: center;
 
 `
-const Input = styled.input`
+const Select = styled.select`
     
     padding:10px ;
     margin:10px 0px;
@@ -102,7 +150,8 @@ const Input = styled.input`
     background-color:#F0F5FA;
     font-size:20px;
     padding-left: 20px;
-`
+    margin-bottom:5%;
+    `
 const Button = styled.button`
     margin-top:10% ;
     color:white;
@@ -119,7 +168,7 @@ const Button = styled.button`
         cursor: not-allowed;
     }
     border-radius: 50px 50px 50px 50px;
-    margin-bottom: 5%;
+    margin-top: 10%;
     
 `
 const Links = styled.div`
@@ -147,5 +196,12 @@ const Extra = styled.div`
 const Text = styled.a`
     font-size: 17px;
     letter-spacing: 1px;
+    
+`
+const Title2 = styled.h1`
+    
+    color:white;
+    margin-left:13%;
+    font-size: 40px;
     
 `

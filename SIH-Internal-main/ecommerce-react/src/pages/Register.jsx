@@ -68,7 +68,7 @@ function Register() {
 
                     {error && <Error>{error}</Error>}
                     
-                    <Text>Already have an account? Sign In</Text>
+                    <Text>Already have an account? <Links onClick = {(e)=> navigate('/login')}>LogIn</Links></Text>
                 </Form>
             </Wrapper>
         </WrapContainer>

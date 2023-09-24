@@ -5,18 +5,20 @@ import BadgeSharpIcon from '@mui/icons-material/BadgeSharp';
 import GroupsSharpIcon from '@mui/icons-material/GroupsSharp';
 import ListSharpIcon from '@mui/icons-material/ListSharp';
 import HandshakeSharpIcon from '@mui/icons-material/HandshakeSharp';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import {publicRequest} from '../Axios';
 import {useDispatch, useSelector} from 'react-redux'
 import {loginFailure,loginStart, loginSuccess} from '../redux/userRedux'
 import loginBG from '../images/loginBG.png'
 
-function Type() {
+function Type(props) {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const {isFetching, error} = useSelector((state)=> state.user)
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const login = async (e)=>{
         e.preventDefault();
@@ -37,7 +39,8 @@ function Type() {
   return (
         <>
         <Body>
-        <Title1>Log-In Options <br /></Title1>
+            {props?.id==='login'?(<Title1>Log-In Options <br /></Title1>):(<Title1>Sign-Up Options <br /></Title1>)}
+        
         <WrapContainer src={loginBG}>
        
             <Wrapper>
@@ -54,7 +57,7 @@ function Type() {
                     <Text>Mentorship and Support to Beginners from Leaders</Text>
                     
                 </Top>
-                    <Button onClick={(e)=> login(e)} disabled={isFetching}>LOGIN</Button>
+                    <Button id={props.id} onClick={(e)=> {props?.id==='login'?(navigate('/login')):(navigate('/register'))}} disabled={isFetching}>{props?.id==='login'?(<>LogIn</>):(<>SignUp</>)}</Button>
 
                     {error && <Error>{error}</Error>}
                     
@@ -73,7 +76,7 @@ function Type() {
                     <GroupsSharpIcon fontSize='large'/>
                     <Text>Support from our team <br /></Text> 
                 </Top>
-                    <Button onClick={(e)=> login(e)} disabled={isFetching}>LOGIN</Button>
+                    <Button id={props.id} onClick={(e)=> {props?.id==='login'?(navigate('/login')):(navigate('/register'))}} disabled={isFetching}>{props?.id==='login'?(<>LogIn</>):(<>SignUp</>)}</Button>
 
                     {error && <Error>{error}</Error>}
                 </Form>
@@ -170,7 +173,7 @@ const Button = styled.button`
     padding:20px 15px;
     font-weight:700;
     letter-spacing:3px ;
-    background-color:#FEB442;
+    background-color:${(props)=> props?.id==='login'?('#FEB442'):('blue')};
     border:none;
     &:disabled{
         color: teal;

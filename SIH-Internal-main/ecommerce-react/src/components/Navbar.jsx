@@ -8,10 +8,11 @@ import { Link } from 'react-router-dom'
 
 
 function Navbar(props) {
-    const Navigate = useNavigate()
+    const navigate = useNavigate()
 
-    const goTo = (e)=>{
-       Navigate(`/${e.target.name}`)
+    const handleAbout = (e)=>{
+        e.preventDefault();
+        
     }
 
   return (
@@ -22,18 +23,18 @@ function Navbar(props) {
        
             <Left>
             
-            <Logo>{props?.id==='main'? 'LOGO' : props?.id==='student'? 'Login' : 'Organizer'}</Logo>
+            <Logo>Logo</Logo>
            
             </Left>
             <Center>
                 
             </Center>
             <Right>
-                <MenuItem>About us</MenuItem>
+                <MenuItem onClick={(e)=>handleAbout(e)}>About us</MenuItem>
                 <MenuItem>FAQ</MenuItem>
                 <MenuItem>Contact</MenuItem>
-                <Button2 name = {props?.id==='main'? 'student' : 'register'} onClick={(e)=> goTo(e)}>{props?.id==='main'? 'LOGIN' : 'SIGNUP'} </Button2>
-                <Button1 name={props?.id==='main'? 'organizer' : 'login'} onClick={(e)=> goTo(e)}>{props?.id==='main'? 'SIGNUP' : 'LOGIN'}</Button1>
+                <Button2 name = 'register' onClick={(e)=> navigate('/login') }>LogIn </Button2>
+                <Button1 name= 'login' onClick={(e)=> navigate('/register')}>SignUp</Button1>
                 
             </Right>
       
