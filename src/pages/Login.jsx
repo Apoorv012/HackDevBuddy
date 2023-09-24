@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import loginBG from "../images/loginBG.png";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import firebaseApp from "../firebase_configs";
+import { useDispatch, useSelector } from "react-redux";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -79,10 +80,8 @@ function Login() {
             <Button onClick={(e) => login(e)}>LOGIN</Button>
 
             {error && <Error>{error}</Error>}
-            <Text>
-              Don't have an account?{" "}
-              <Links onClick={(e) => navigate("/register")}>SignUp</Links>
-            </Text>
+            <Text>Don't have an account? </Text>
+            <Links onClick={(e) => navigate("/register")}>SignUp</Links>
           </Form>
         </Wrapper>
       </WrapContainer>
@@ -172,7 +171,7 @@ const Extra = styled.div`
   display: flex;
   justify-content: space-evenly;
 `;
-const Text = styled.a`
+const Text = styled.p`
   font-size: 17px;
   letter-spacing: 1px;
 `;
