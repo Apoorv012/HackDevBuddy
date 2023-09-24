@@ -19,26 +19,53 @@ function Register() {
 
   const auth = getAuth(firebaseApp);
 
+  const isValidEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
   const register = async (e) => {
     e.preventDefault();
     try {
-      if (confirmPass !== password) {
+      if (username === "") {
+        setError("Username is required");
+        setTimeout(() => {
+          setError("");
+        }, 2000);
+      } else if (email === "") {
+        setError("Email is required");
+        setTimeout(() => {
+          setError("");
+        }, 2000);
+      } else if (!isValidEmail(email)) {
+        setError("Email is not valid");
+        setTimeout(() => {
+          setError("");
+        }, 2000);
+      } else if (password === "") {
+        setError("Password is required");
+        setTimeout(() => {
+          setError("");
+        }, 2000);
+      } else if (confirmPass === "") {
+        setError("Confirm Password is required");
+        setTimeout(() => {
+          setError("");
+        }, 2000);
+      } else if (confirmPass !== password) {
         setError("Password Do Not Match");
         setTimeout(() => {
           setError("");
         }, 2000);
       } else {
         // Using Firebase for authentication
-        console.log(email);
-
         createUserWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
             console.log(user);
-            setMessage("User Created Successfully");
+            setError("User Created Successfully");
             setTimeout(() => {
-              setMessage("");
+              setError("");
             }, 2000);
           })
           .catch((error) => {
@@ -95,7 +122,9 @@ function Register() {
                 <input type="checkbox" /> Remember passworod{" "}
               </Links>
             </Extra>
-            <Button onClick={(e) => register(e)}>SIGN UP</Button>
+            <Button type="submit" onClick={(e) => register(e)}>
+              SIGN UP
+            </Button>
 
             {error && <Error>{error}</Error>}
 

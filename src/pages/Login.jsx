@@ -3,28 +3,50 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import loginBG from "../images/loginBG.png";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import firebaseApp from "../firebase_configs";
 
 function Login() {
-  // const [email, setemail] = useState("");
-  // const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   // const { isFetching, error } = useSelector((state) => state.user);
   // const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const login = async (e) => {
-  //   e.preventDefault();
-  //   // dispatch(loginStart())
-  //   try {
-  //     const res = await publicRequest.post("/auth/login", {
-  //       email,
-  //       password,
-  //     });
-  //     console.log(res.data);
-  //     dispatch(loginSuccess(res.data));
-  //   } catch (error) {
-  //     dispatch(loginFailure(error.response.data.message));
-  //   }
-  // };
+  const auth = getAuth(firebaseApp);
+
+  const login = async (e) => {
+    e.preventDefault();
+    try {
+      if (email === "") {
+        setError("Email is required");
+        setTimeout(() => {
+          setError("");
+        }, 2000);
+      } else if (password === "") {
+        setError("Password is required");
+        setTimeout(() => {
+          setError("");
+        }, 2000);
+      } else {
+        signInWithEmailAndPassword(auth, email, password).then(
+          (userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log(user);
+            setError("User Sign In Succesful");
+            setTimeout(() => {
+              setError("");
+            }, 2000);
+          }
+        );
+      }
+    } catch (error) {
+      dispatch(loginFailure(error.response.data.message));
+    }
+  };
+
   return (
     <>
       <WrapContainer src={loginBG}>
@@ -33,7 +55,7 @@ function Login() {
           <Form>
             <Input
               placeholder="Email"
-              onChange={(e) => setemail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <Input
               type="password"
@@ -48,6 +70,7 @@ function Login() {
             </Extra>
             <Button onClick={(e) => login(e)}>LOGIN</Button>
 
+            {error && <Error>{error}</Error>}
             <Text>
               Don't have an account?{" "}
               <Links onClick={(e) => navigate("/register")}>SignUp</Links>
