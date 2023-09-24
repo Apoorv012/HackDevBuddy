@@ -22,9 +22,7 @@ function NewsLetter() {
                 <br /> while empowering candidates to refine their skills and
                 seize promising <br /> opportunities to unlock their potential
               </Desc>
-              {/* <div style={{ textAlign: 'right',backgroundColor: 'red',display: 'inline-block', }}>
-                            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt="image" style={{ width: '400px', }}/>
-                        </div> */}
+            
             </Left>
             <Right>
               <Image>

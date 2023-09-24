@@ -9,7 +9,7 @@ import loginBG from '../images/loginBG.png'
 
 
 function Login() {
-    const [username, setUsername] = useState('');
+    const [email, setemail] = useState('');
     const [password, setPassword] = useState('');
     const {isFetching, error} = useSelector((state)=> state.user)
     const dispatch = useDispatch();
@@ -20,7 +20,7 @@ function Login() {
         // dispatch(loginStart())
         try {
             const res = await publicRequest.post('/auth/login',{
-                username,
+                email,
                 password
             })
             console.log(res.data)     
@@ -35,8 +35,8 @@ function Login() {
             <Wrapper>
                 <Title>Log In</Title>
                 <Form>
-                    <Input placeholder='Userame' onChange={(e)=> setUsername(e.target.value)}/>
-                    <Input type="password" placeholder='Password' onChange={(e)=> setPassword(e.target.value)}/>
+                    <Input placeholder='Userame' onChange={(e)=> setemail(e.target.value)}/>
+                    <Input type="email" placeholder='Email' onChange={(e)=> setPassword(e.target.value)}/>
                     <Extra><Links><input type="checkbox"  /> Remember password                      </Links>
                     <Links>Forgot passoword?</Links>
                     </Extra>
