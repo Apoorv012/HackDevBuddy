@@ -30,8 +30,8 @@ function Login() {
           setError("");
         }, 2000);
       } else {
-        signInWithEmailAndPassword(auth, email, password).then(
-          (userCredential) => {
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
             console.log(user);
@@ -39,8 +39,16 @@ function Login() {
             setTimeout(() => {
               setError("");
             }, 2000);
-          }
-        );
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            setError(errorMessage);
+            setTimeout(() => {
+              setError("");
+            }, 2000);
+            // ..
+          });
       }
     } catch (error) {
       dispatch(loginFailure(error.response.data.message));
