@@ -73,7 +73,7 @@ function Register() {
             // Signed in
             const user = userCredential.user;
             console.log(user);
-
+            
             updateProfile(auth.currentUser, {
               displayName: username,
             })
@@ -83,7 +83,7 @@ function Register() {
               .catch((error) => {
                 console.log(error.code, error.message);
               });
-
+              {user && navigate('/login')}
             setError("User Created Successfully");
             setTimeout(() => {
               setError("");
