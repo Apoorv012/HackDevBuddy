@@ -14,7 +14,6 @@ function Main() {
       <Navbar />
       <Landing />
       <About />
-      <Footer />
     </>
   );
 }

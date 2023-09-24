@@ -3,99 +3,105 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import landing from "../images/landing.png";
+import { animateScroll as scroll } from "react-scroll";
+
 function Landing(props) {
   const navigate = useNavigate();
 
-  const scrollToUpcoming = (e)=>{
+  const scrollToUpcoming = (e) => {
     e.preventDefault();
-    e.view.window.scrollBy(0,4500)
-  }
-  const scrollToLearnMore = (e)=>{
+    e.view.window.scrollBy(0, 4500);
+  };
+  const scrollToLearnMore = (e) => {
     e.preventDefault();
-    e.view.window.scrollBy(0,1000)
+    e.view.window.scrollBy(0, 1000);
+  };
+
+  function scrollToAboutUs(e) {
+    e.preventDefault();
+    scroll.scrollTo(1000);
   }
   return (
     <>
       <Container>
         <Wrapper>
-          {props?.user ? 
-          <>
-          <Top>
-            <Left>
-              <Title>
-                Show your <br /> Skills
-              </Title>
-              <Desc>
-                Give these tests to qualify into hackathons.
-              </Desc>
-            </Left>
-            <Right>
-              <Image>
-                <img
-                  src={landing}
-                  style={{
-                    maxWidth: "100%",
-                    maxHeight: "100%",
-                    objectFit: "contain",
-                  }}
-                />
-              </Image>
-            </Right>
-          </Top>
-          <Bottom>
-            <Bcenter>
-              <Button1 onClick={(e) => scrollToUpcoming(e)}>
-                Get Started
-              </Button1>
-              <Button2 onClick={(e) => {scrollToLearnMore(e)}}>Learn more</Button2>
-            </Bcenter>
-          </Bottom>
-
-
-
-          </>  : 
-          
-          <>
-          <Top>
-            <Left>
-              <Title>
-                Turning Imagination <br /> into Ideas
-              </Title>
-              <Desc>
-                We excel in helping organisations assemble the strongest
-                technical teams,
-                <br /> while empowering candidates to refine their skills and
-                seize promising <br /> opportunities to unlock their potential
-              </Desc>
-            </Left>
-            <Right>
-              <Image>
-                <img
-                  src={landing}
-                  style={{
-                    maxWidth: "100%",
-                    maxHeight: "100%",
-                    objectFit: "contain",
-                  }}
-                />
-              </Image>
-            </Right>
-          </Top>
-          <Bottom>
-            <Bcenter>
-              <Button1 onClick={(e) => navigate("/register")}>
-                Get Started
-              </Button1>
-              <Button2>Learn more</Button2>
-            </Bcenter>
-          </Bottom>
-          
-          
-          </>
-          
-          
-          }
- 
+          {props?.user ? (
+            <>
+              <Top>
+                <Left>
+                  <Title>
+                    Show your <br /> Skills
+                  </Title>
+                  <Desc>Give these tests to qualify into hackathons.</Desc>
+                </Left>
+                <Right>
+                  <Image>
+                    <img
+                      src={landing}
+                      style={{
+                        maxWidth: "100%",
+                        maxHeight: "100%",
+                        objectFit: "contain",
+                      }}
+                    />
+                  </Image>
+                </Right>
+              </Top>
+              <Bottom>
+                <Bcenter>
+                  <Button1 onClick={(e) => scrollToUpcoming(e)}>
+                    Get Started
+                  </Button1>
+                  <Button2
+                    onClick={(e) => {
+                      scrollToLearnMore(e);
+                    }}
+                  >
+                    Learn more
+                  </Button2>
+                </Bcenter>
+              </Bottom>
+            </>
+          ) : (
+            <>
+              <Top>
+                <Left>
+                  <Title>
+                    Turning Imagination <br /> into Ideas
+                  </Title>
+                  <Desc>
+                    We excel in helping organisations assemble the strongest
+                    technical teams,
+                    <br /> while empowering candidates to refine their skills
+                    and seize promising <br /> opportunities to unlock their
+                    potential
+                  </Desc>
+                </Left>
+                <Right>
+                  <Image>
+                    <img
+                      src={landing}
+                      style={{
+                        maxWidth: "100%",
+                        maxHeight: "100%",
+                        objectFit: "contain",
+                      }}
+                    />
+                  </Image>
+                </Right>
+              </Top>
+              <Bottom>
+                <Bcenter>
+                  <Button1 onClick={(e) => navigate("/register")}>
+                    Get Started
+                  </Button1>
+                  <Button2 onClick={(e) => scrollToAboutUs(e)}>
+                    Learn more
+                  </Button2>
+                </Bcenter>
+              </Bottom>
+            </>
+          )}
         </Wrapper>
       </Container>
     </>

@@ -12,9 +12,10 @@ import { Link, animateScroll as scroll } from "react-scroll";
 function Navbar(props) {
   const navigate = useNavigate();
 
-  const handleAbout = (e) => {
+  function scrollToAboutUs(e) {
     e.preventDefault();
-  };
+    scroll.scrollTo(870);
+  }
 
   return (
     <Container>
@@ -25,33 +26,29 @@ function Navbar(props) {
         </Left>
         <Center></Center>
         <Right>
-
-        {props?.user ? 
-          <>
-          <Text>{props?.user?.username}</Text>
-          <Button3 name="logout" onClick={(e) => handlelogOut(e)}>
-            Logout
-          </Button3>
-          </>
-          :
-          <>
-          <Link to="about" smooth={true} duration={1000}>
-            <MenuItem>About us</MenuItem>
-          </Link>
-          <MenuItem>FAQ</MenuItem>
-          <MenuItem>Contact</MenuItem>
-          <Button2 name="register" onClick={(e) => navigate("/login")}>
-            LogIn
-          </Button2>
-          <Button1 name="login" onClick={(e) => navigate("/register")}>
-            SignUp
-          </Button1>
-          </>
-          
-          }
-
-        </Right>  
-          
+          {props?.user ? (
+            <>
+              <Text>{props?.user?.username}</Text>
+              <Button3 name="logout" onClick={(e) => handlelogOut(e)}>
+                Logout
+              </Button3>
+            </>
+          ) : (
+            <>
+              <MenuItem onClick={(e) => scrollToAboutUs(e)}>About us</MenuItem>
+              <MenuItem onClick={(e) => scrollToAboutUs(e)}>FAQ</MenuItem>
+              <MenuItem onClick={(e) => scrollToAboutUs(e)}>
+                Contact us
+              </MenuItem>
+              <Button2 name="register" onClick={(e) => navigate("/login")}>
+                LogIn
+              </Button2>
+              <Button1 name="login" onClick={(e) => navigate("/register")}>
+                SignUp
+              </Button1>
+            </>
+          )}
+        </Right>
       </Wrapper>
     </Container>
   );
@@ -188,36 +185,36 @@ const Button2 = styled.button`
   white-space: nowrap;
 `;
 const Button3 = styled.button`
-appearance: none;
-backface-visibility: hidden;
-background-color: #feb442;
-border-radius: 8px;
-border-style: none;
-box-shadow: rgba(39, 174, 96, 0.15) 0 4px 9px;
-box-sizing: border-box;
-color: #fff;
-cursor: pointer;
-display: inline-block;
-font-family: Inter, -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
-  sans-serif;
-font-size: 17px;
-font-weight: 600;
-letter-spacing: normal;
-line-height: 1.5;
-outline: none;
-overflow: hidden;
-padding: 15px 40px;
-position: relative;
-text-align: center;
-text-decoration: none;
-transform: translate3d(0, 0, 0);
-transition: all 0.3s;
-user-select: none;
--webkit-user-select: none;
-touch-action: manipulation;
-vertical-align: top;
-white-space: nowrap;
-`
+  appearance: none;
+  backface-visibility: hidden;
+  background-color: #feb442;
+  border-radius: 8px;
+  border-style: none;
+  box-shadow: rgba(39, 174, 96, 0.15) 0 4px 9px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Inter, -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
+    sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: normal;
+  line-height: 1.5;
+  outline: none;
+  overflow: hidden;
+  padding: 15px 40px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transform: translate3d(0, 0, 0);
+  transition: all 0.3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: top;
+  white-space: nowrap;
+`;
 const Ribbon = styled.div`
     height: 3px
     width: 1000px;
@@ -225,5 +222,4 @@ const Ribbon = styled.div`
     border-top: 30px solid #0E21A0;
     
 `;
-const Text = styled.span`
-`
+const Text = styled.span``;
