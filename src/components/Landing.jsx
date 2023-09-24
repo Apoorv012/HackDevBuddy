@@ -1,4 +1,3 @@
-import { Send } from "@material-ui/icons";
 import React, { useRef } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +21,6 @@ function NewsLetter() {
                 <br /> while empowering candidates to refine their skills and
                 seize promising <br /> opportunities to unlock their potential
               </Desc>
-            
             </Left>
             <Right>
               <Image>

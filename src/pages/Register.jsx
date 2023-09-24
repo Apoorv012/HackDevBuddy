@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { publicRequest } from "../Axios";
 import { useNavigate } from "react-router-dom";
 import signupBG from "../images/signupBG.png";
-import DatePicker from "react-date-picker";
 
 function Register() {
   const navigate = useNavigate();
