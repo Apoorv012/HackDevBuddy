@@ -1,12 +1,13 @@
-import { useState, useRef } from "react";
-import Webcam from "react-webcam";
+// Import useState
+import React, { useState } from "react";
 import webgazer from "webgazer";
 
 function App() {
-  const webcamRef = useRef(null);
-  const canvasRef = useRef(null);
+  // webgazer.saveDataAcrossSessions(false);
+  webgazer.showPredictionPoints(false);
+  webgazer.showVideo(false);
 
-  webgazer.saveDataAcrossSessions(false);
+  let max = 0;
 
   webgazer
     .setGazeListener(function (data, elapsedTime) {
@@ -15,41 +16,45 @@ function App() {
       }
       var xprediction = data.x; //these x coordinates are relative to the viewport
       var yprediction = data.y; //these y coordinates are relative to the viewport
-      console.log(data.x, data.y); //elapsed time is based on time since begin was called
+
+      // print xPrediction to console
+      // console.log(xprediction);
+
+      if (xprediction > 100 && xprediction < 1450) {
+        setIsLookingAtScreen(true);
+      } else {
+        setIsLookingAtScreen(false);
+      }
+
+      if (xprediction > max) {
+        max = xprediction;
+      }
+
+      // print isLookingAtScreen to console
+      console.log(max);
     })
     .begin();
+
+  function recalibrate() {
+    webgazer.clearData();
+  }
+
+  const [isLookingAtScreen, setIsLookingAtScreen] = useState(false);
 
   return (
     <>
       <h3 style={{ textAlign: "center", marginTop: 20 }}>Webcam</h3>
-      <Webcam
-        ref={webcamRef}
-        style={{
-          position: "absolute",
-          marginLeft: "auto",
-          marginRight: "auto",
-          left: 0,
-          right: 0,
-          textAlign: "center",
-          width: 640,
-          height: 480,
-          zIndex: 10,
-        }}
-      />
-      <canvas
-        ref={canvasRef}
-        style={{
-          position: "absolute",
-          marginLeft: "auto",
-          marginRight: "auto",
-          left: 0,
-          right: 0,
-          textAlign: "center",
-          width: 640,
-          height: 480,
-          zIndex: 11,
-        }}
-      />
+      <div className="d-flex align-items-center justify-content-center">
+        <button className="btn btn-primary" onClick={recalibrate}>
+          Recalibrate
+        </button>
+
+        {/* Print if the person is looking at the screen or not
+            Also print in green is he is looking, red is he is not */}
+        <h3 style={{ color: isLookingAtScreen ? "green" : "red" }}>
+          {isLookingAtScreen ? "Looking at screen" : "Not looking at screen"}
+        </h3>
+      </div>
     </>
   );
 }
