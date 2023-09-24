@@ -12,6 +12,18 @@ function Exam() {
   return (
     <>
       <Body>
+        <Record>
+        <Cam>
+
+        </Cam>
+        <Warning>
+        <Title2>Warning!</Title2>
+          <Text2>Number of times looked away: 8</Text2>
+          <Text2>Max limit: 10</Text2>
+        </Warning>
+        <Text3>Time Left - 09:59min</Text3>
+
+        </Record>
         <Form typeof='submit'>
         <Wrapper>
         <Container1>
@@ -45,22 +57,78 @@ export default Exam
 
 const Body = styled.div`
   background-color: #F1F0E8;
-  height: 200vh;
+  height: 100%;
   width:100vw;
+  display:flex;
+  padding-bottom:5%;
+`
+const Record = styled.div`
+  display:flex;
+  background-color: #F1F0E8;
+  width: 20vw;
+  height:90%;
+
+  margin-top:1%;
+  margin-left:3%;
+  position: fixed;
+`
+const Cam = styled.div`
+  display:flex;
+  background-color: #F1F0E8;
+  width: 20vw;
+  height:30%;
+  border: dotted red;
+  margin-top:2%;
+  margin-left:-2px;
   
+  position: fixed;
+`
+const Warning = styled.div`
   
-   
+  background-color: white;
+  border-radius: 20px 20px 20px 20px;
+  width: 20vw;
+  height:30%;
+
+  margin-top:20%;
+  margin-left:-2px;
+  position: fixed;
+  white-space: pre;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  
 `
 const Title = styled.h1`
 font-size: 50px;
 margin-bottom: 1%;
+
 `
 const Text = styled.div`
 font-size: 20px;
-
-   
-   
 `
+const Text3 = styled.h1`
+font-size: 30px;
+margin-bottom: 4%;
+margin-top:200%;
+text-align:center;
+color:black;
+`
+
+const Title2 = styled.h1`
+font-size: 50px;
+margin-bottom: 4%;
+margin-top:1%;
+text-align:center;
+color:#DB3030;
+`
+const Text2 = styled.div`
+font-size: 20px;
+line-height:150%;
+color:#0E21A0;
+margin-bottom: 4%;
+margin-top:6%;
+margin-left:5%;
+`
+
 const Submit = styled.button`
   margin-top: 2%;
   
@@ -97,6 +165,7 @@ const Submit = styled.button`
 }
 `
 const Form = styled.form`
+  margin-left:20%;
 
 `
 const Container1 = styled.div`
@@ -145,6 +214,7 @@ const Containery = styled.div`
    
 `
 const Wrapper = styled.div`
+  
    width: 70%;
    height: 100%;
    
