@@ -7,15 +7,13 @@ import Landingparts from "../components/Landingparts";
 import Card from "../components/Card";
 import styled from "styled-components";
 import About from "./About.jsx";
-import Upcoming from "./Upcoming.jsx";
 
 function Main() {
   return (
     <>
-      <Navbar id="navbar" />
-      <Landing id="landing" />
-      <About id="about" />
-      <Upcoming id="upcoming" />
+      <Navbar />
+      <Landing />
+      <About />
       <Footer />
     </>
   );

@@ -198,12 +198,12 @@ const Extra = styled.div`
   display: flex;
   justify-content: space-evenly;
 `;
-const Text = styled.a`
+const Text = styled.div`
   font-size: 20px;
   letter-spacing: 1px;
   line-height: 4;
 `;
-const Top = styled.a`
+const Top = styled.div`
   font-size: 25px;
   letter-spacing: 1px;
   line-height: 1.6;
