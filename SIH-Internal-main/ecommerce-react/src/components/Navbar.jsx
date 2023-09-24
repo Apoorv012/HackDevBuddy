@@ -8,9 +8,11 @@ import { Link } from 'react-router-dom'
 
 
 function Navbar(props) {
-    const navigate = useNavigate()
+    const Navigate = useNavigate()
 
-    
+    const goTo = (e)=>{
+       Navigate(`/${e.target.name}`)
+    }
 
   return (
     <Container>
@@ -30,8 +32,8 @@ function Navbar(props) {
                 <MenuItem>About us</MenuItem>
                 <MenuItem>FAQ</MenuItem>
                 <MenuItem>Contact</MenuItem>
-                <Button2 name = {props?.id==='main'? 'student' : 'register'} onClick={(e)=> navigate('userType/login')}>Login</Button2>
-                <Button1 name={props?.id==='main'? 'organizer' : 'login'} onClick={(e)=> navigate('userType/register')}>Signin</Button1>
+                <Button2 name = {props?.id==='main'? 'student' : 'register'} onClick={(e)=> goTo(e)}>{props?.id==='main'? 'LOGIN' : 'SIGNUP'} </Button2>
+                <Button1 name={props?.id==='main'? 'organizer' : 'login'} onClick={(e)=> goTo(e)}>{props?.id==='main'? 'SIGNUP' : 'LOGIN'}</Button1>
                 
             </Right>
       

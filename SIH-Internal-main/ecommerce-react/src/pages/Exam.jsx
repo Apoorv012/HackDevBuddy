@@ -11,11 +11,31 @@ function Exam() {
 
   return (
     <>
+      <Body>
         <Form typeof='submit'>
+        <Wrapper>
+        <Container1>
+          <Title>Exam Name</Title>
+          <Text>About the Exam(Description)</Text>
+          <Text>Time Duration(any)</Text>
+        </Container1>
+        <Containerb>
           <Question/>
+        </Containerb>
+        <Containery>
           <Question/>
-          <Submit type='submit' onClick={(e)=> submitAnswer(e)}>Submit</Submit>
+        </Containery> 
+        <Containerb>
+          <Question/>
+        </Containerb>
+        <Containery>
+          <Question/>
+        </Containery> 
+        
+        <Submit type='submit' onClick={(e)=> submitAnswer(e)}>Submit</Submit>
+        </Wrapper>
         </Form>
+      </Body>
         
     </>
   )
@@ -23,9 +43,114 @@ function Exam() {
 
 export default Exam
 
+const Body = styled.div`
+  background-color: #F1F0E8;
+  height: 200vh;
+  width:100vw;
+  
+  
+   
+`
+const Title = styled.h1`
+font-size: 50px;
+margin-bottom: 1%;
+`
+const Text = styled.div`
+font-size: 20px;
 
-
+   
+   
+`
 const Submit = styled.button`
+  margin-top: 2%;
+  
+  align-items: center;
+  appearance: none;
+  background-color: #0E21A0;
+  background-size: calc(100% + 20px) calc(100% + 20px);
+  border-radius: 100px;
+  border-width: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: CircularStd,sans-serif;
+  font-size: 1rem;
+  height: auto;
+  justify-content: center;
+  line-height: 1.5;
+  padding: 10px 90px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color .2s,background-position .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: top;
+  white-space: nowrap;
+
+  margin-left: -3.5%;
+  font-size: 20px;
+  margin-top: 3%;
+}
 `
 const Form = styled.form`
+
+`
+const Container1 = styled.div`
+   width: 100%;
+  
+   border: solid 4px #FEB442
+   ;
+   float:right;
+   border-radius: 30px 30px 30px 30px;
+   
+   padding-left:2.5%;
+   margin-top: 2%;
+   padding-top: 1%;
+   padding-bottom: 2%;
+   background-color: white;
+   
+   
+`
+const Containerb = styled.div`
+   width: 100%;
+   padding-top: 2%;
+   padding-bottom: 2%;
+   
+   float:right;
+   border-radius: 30px 30px 30px 30px;
+   padding-left:2.5%;
+   margin-top: 2%;
+   border: solid 4px #0E21A0;
+   background-color: white;
+   
+   
+
+   
+`
+const Containery = styled.div`
+   width: 100%;
+   padding-top: 2%;
+   padding-bottom: 2%;
+   
+   float:right;
+   border-radius: 30px 30px 30px 30px;
+   padding-left:2.5%;
+   margin-top: 2%;
+   border: solid 4px #FEB442;
+   background-color: white;
+   
+`
+const Wrapper = styled.div`
+   width: 70%;
+   height: 100%;
+   
+   float:right;
+   border-radius: 50px 50px 50px 50px;
+   margin-right: 2%;
+   padding-left:2%;
+   
 `

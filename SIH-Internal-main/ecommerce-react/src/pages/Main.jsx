@@ -7,6 +7,7 @@ import Landingparts from '../components/Landingparts'
 import Card from '../components/Card'
 import styled from 'styled-components'
 import About from './About.jsx';
+import Upcoming from './Upcoming.jsx';
 
 
 
@@ -18,6 +19,7 @@ function Main() {
         <Navbar id='main'/>
         <Landing id='main'/>
         <About id='main'/>
+        <Upcoming id='main'/>
         <Footer/>
 
     </>

@@ -17,6 +17,7 @@ function Register() {
     const [dateValue, onDateChange] = useState(new Date());
     const [date, setDate] = useState(new Date());
     
+    
 
     const register = async (e)=>{
         e.preventDefault()
@@ -67,7 +68,7 @@ function Register() {
 
                     {error && <Error>{error}</Error>}
                     
-                    <Text>Already have an account?<Links onClick={(e)=> navigate('/login')}>LogIn</Links></Text>
+                    <Text>Already have an account? Sign In</Text>
                 </Form>
             </Wrapper>
         </WrapContainer>

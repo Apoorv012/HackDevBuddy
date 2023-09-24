@@ -13,8 +13,8 @@ function Question() {
             <Wrapper>
 
                 <Top>
-                    <Qno>1</Qno>
-                    <Qtext>Full form of js</Qtext>
+                    <Qno>Q.1-</Qno>
+                    <Qtext>Question</Qtext>
                 </Top>
                 <Bottom>
                   <Option/>
@@ -32,16 +32,23 @@ export default Question
 
 
 const Container = styled.div`
-height: 100%;
+  height: 100%;
+  
+
 
 `
 const Wrapper = styled.div`
 `
 const Top = styled.div`
+  display: felx;
+  font-size: 15px;
+  margin-bottom: 3%;
 `
-const Qno = styled.span`
+const Qno = styled.h1`
+  
 `
-const Qtext = styled.h2`
+const Qtext = styled.h1`
+
 `
 const Bottom = styled.div`
 `

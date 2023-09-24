@@ -49,6 +49,7 @@ const Container = styled.div`
     display:flex ;
     
     background-color: #F1F0E8;
+    margin-top: -10%;
     
 `
 const Box1 = styled.div`

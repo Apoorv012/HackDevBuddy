@@ -11,7 +11,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {loginFailure,loginStart, loginSuccess} from '../redux/userRedux'
 import loginBG from '../images/loginBG.png'
 
-function Type() {
+function Upcoming() {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -37,24 +37,21 @@ function Type() {
   return (
         <>
         <Body>
-        <Title1>Log-In Options <br /></Title1>
+        <Title1>Upcoming Hackathons! <br /></Title1>
         <WrapContainer src={loginBG}>
        
             <Wrapper>
-                <Title>As a Student</Title>
+                <Title>Smart India Hackathon <br />(Internal)-JIIT NOIDA</Title>
                 <Form>
                 <Top>
-                    <BadgeSharpIcon fontSize='large'/>
-                    <Text>Access to our features<br /></Text>
-                    <MilitaryTechSharp fontSize='large'/>
-                    <Text>Cool prizes for Winners <br /></Text>
-                    <GroupsSharpIcon fontSize='large'/>
-                    <Text>Partner with great Companies and Teams<br/>for exciting Haclathons <br /></Text>
-                    <HandshakeSharpIcon fontSize='large'/>
-                    <Text>Mentorship and Support to Beginners from Leaders</Text>
+                    
+                    <Text>Date: Setpember 23-25,2023<br /></Text>
+                   
+                    <Text>Location: Uttar Pradesh, India <br /></Text>
+                    
                     
                 </Top>
-                    <Button onClick={(e)=> login(e)} disabled={isFetching}>LOGIN</Button>
+                <Button onClick={(e)=> login(e)} disabled={isFetching}>APPLY</Button>
 
                     {error && <Error>{error}</Error>}
                     
@@ -62,22 +59,34 @@ function Type() {
                 </Form>
             </Wrapper>
             <Wrapper>
-                <Title>As an Organiser</Title>
+                <Title>Smart India Hackathon <br />(Internal)-JIIT NOIDA</Title>
                 
                 <Form>
                 <Top>
-                    <BadgeSharpIcon fontSize='large'/>
-                    <Text>Access to our features an platform <br /></Text>
-                    <ListSharpIcon fontSize='large'/>
-                    <Text>Get listed on the Hackathons page for more reach <br /></Text>
-                    <GroupsSharpIcon fontSize='large'/>
-                    <Text>Support from our team <br /></Text> 
+                <Text>Date: Setpember 23-25,2023<br /></Text>
+                   
+                   <Text>Location: Uttar Pradesh, India <br /></Text>
                 </Top>
-                    <Button onClick={(e)=> login(e)} disabled={isFetching}>LOGIN</Button>
+                <Button onClick={(e)=> login(e)} disabled={isFetching}>APPLY</Button>
 
                     {error && <Error>{error}</Error>}
                 </Form>
               
+            </Wrapper>
+            <Wrapper>
+                <Title>Smart India Hackathon <br />(Internal)-JIIT NOIDA</Title>
+                <Form>
+                <Top>
+                <Text>Date: Setpember 23-25,2023<br /></Text>
+                   
+                   <Text>Location: Uttar Pradesh, India <br /></Text>
+                </Top>
+                    <Button onClick={(e)=> login(e)} disabled={isFetching}>APPLY</Button>
+
+                    {error && <Error>{error}</Error>}
+                    
+                    
+                </Form>
             </Wrapper>
         </WrapContainer>
         </Body>
@@ -86,27 +95,30 @@ function Type() {
   )
 }
 
-export default Type
+export default Upcoming
 
 
 
 const Title1 = styled.h1`
-    margin-top:10%;
+    margin-top:5%;
     margin-bottom:10% ;
     font-weight:610px;
     font-size:70px ;
     letter-spacing:2px ;
     text-align:center;
+   
     
 `
 
 
 const Body = styled.div`
     
-    background-color:#E2E9EF;
-    margin-top: -12%;
+background-color:#E2E9EF;
+    
 
-    padding-top:5%;
+    padding-top:1%;
+    
+
     
     
 `
@@ -122,10 +134,10 @@ const WrapContainer = styled.div`
 `
 const Wrapper = styled.div`
     background-color: #F9FEFE;
-    width:35vw ;
+    width:25vw ;
     padding:20px ;
     
-    height: 70%;
+    height: 60%;
 
     justify-content:center;
     border-radius:5%;
@@ -134,19 +146,21 @@ const Wrapper = styled.div`
 `
 
 const Title = styled.h1`
-    margin-top:10%;
+    margin-top:5%;
     margin-bottom:10% ;
-    font-weight:600;
-    font-size:50px ;
+    font-weight:700;
+    font-size:30px ;
     letter-spacing:2px ;
-    text-align:center;
+    text-align:left;
+    margin-right: 30%;
+
 `
 const Form = styled.form`
     display:flex ;
     flex-direction:column ;
-    text-align:center;
-    align-items: center;
     text-align:left;
+    align-items: left;
+    
 
 `
 const Input = styled.input`
@@ -162,12 +176,12 @@ const Input = styled.input`
     padding-left: 20px;
 `
 const Button = styled.button`
-    margin-top:10% ;
+    margin-top:15% ;
     color:white;
     cursor: pointer;
-    width:500px;
+    width:350px;
     font-size:20px;
-    padding:20px 15px;
+    padding:10px 7px;
     font-weight:700;
     letter-spacing:3px ;
     background-color:#FEB442;
@@ -205,12 +219,15 @@ const Extra = styled.div`
 const Text = styled.a`
     font-size: 20px;
     letter-spacing: 1px;
+    line-height:4.0;
     
 `
 const Top = styled.a`
     font-size: 25px;
     letter-spacing: 1px;
     line-height: 1.6;
+    text-align: left;
+
     
     
 `

@@ -5,15 +5,13 @@ import {publicRequest} from '../Axios';
 import {useDispatch, useSelector} from 'react-redux'
 import {loginFailure,loginStart, loginSuccess} from '../redux/userRedux'
 import loginBG from '../images/loginBG.png'
-import { useNavigate } from 'react-router-dom';
 
 
-function Login(props) {
+function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const {isFetching, error} = useSelector((state)=> state.user)
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const login = async (e)=>{
         e.preventDefault();
@@ -44,7 +42,7 @@ function Login(props) {
 
                     {error && <Error>{error}</Error>}
                     
-                    <Text>Don't have an account?<Links onClick={(e)=> navigate('/register')}>Sign Up</Links> </Text>
+                    <Text>Don't have an account? Sign Up</Text>
                 </Form>
             </Wrapper>
         </WrapContainer>

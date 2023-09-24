@@ -12,11 +12,13 @@ function Option(props) {
     <>
         <Container>
             <Input type="radio" value= 'Java script' onChange={(e)=> setChecked(e.target.value)} checked = {checked === 'Java script'}/>
-            <Label for='javascipt'>Java script</Label>
+            <Label for='javascipt'>Option1</Label> <br />
             <Input type="radio" value= 'type script' onChange={(e)=> setChecked(e.target.value)} checked = {checked === 'type script'}/>
-            <Label for='typescipt'>type script</Label>
+            <Label for='typescipt'>Option1</Label> <br />
             <Input type="radio" value='hello script' onChange={(e)=> setChecked(e.target.value)} checked = {checked === 'hello script'}/>
-            <Label for='helloscipt'>hello script</Label>
+            <Label for='helloscipt'>Option1</Label> <br />
+            <Input type="radio" value='bye script' onChange={(e)=> setChecked(e.target.value)} checked = {checked === 'bye script'}/>
+            <Label for='helloscipt'>Option1</Label>
         </Container>
     </>
   )
@@ -31,4 +33,8 @@ const Input = styled.input`
   
 `
 const Label = styled.label`
+  line-height: 1.6;
+  font-size: 25px;
+  margin-left:1%;
+  
 `
