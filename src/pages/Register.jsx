@@ -9,6 +9,10 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { Message } from "@mui/icons-material";
+import { db } from "../firebase_configs";
+import { collection, addDoc } from "firebase/firestore";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../features/userSlice";
 
 function Register() {
   const navigate = useNavigate();
@@ -22,6 +26,7 @@ function Register() {
   const [date, setDate] = useState(new Date());
 
   const auth = getAuth(firebaseApp);
+  const dispatch = useDispatch();
 
   const isValidEmail = (email) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -68,12 +73,21 @@ function Register() {
         }, 2000);
       } else {
         // Using Firebase for authentication
-        createUserWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
+        await createUserWithEmailAndPassword(auth, email, password)
+          .then(async (userCredential) => {
             // Signed in
             const user = userCredential.user;
             console.log(user);
-            
+
+            dispatch(
+              loginUser({
+                uid: user.uid,
+                email: user.email,
+                username: username,
+                token: user.accessToken,
+              })
+            );
+
             updateProfile(auth.currentUser, {
               displayName: username,
             })
@@ -83,7 +97,9 @@ function Register() {
               .catch((error) => {
                 console.log(error.code, error.message);
               });
-              {user && navigate('/login')}
+            {
+              user && navigate("/userType");
+            }
             setError("User Created Successfully");
             setTimeout(() => {
               setError("");

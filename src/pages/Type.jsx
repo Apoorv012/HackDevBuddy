@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import MilitaryTechSharp from "@mui/icons-material/MilitaryTechSharp";
 import BadgeSharpIcon from "@mui/icons-material/BadgeSharp";
@@ -8,27 +8,58 @@ import HandshakeSharpIcon from "@mui/icons-material/HandshakeSharp";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import loginBG from "../images/loginBG.png";
+import { db } from "../firebase_configs";
+import { collection, addDoc } from "firebase/firestore";
+import { useSelector, useDispatch } from "react-redux";
+import { userType } from "../features/userSlice";
 
 function Type(props) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const { isFetching, error } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.data.user);
 
-  const login = async (e) => {
+  const handleStudentClick = async (e) => {
     e.preventDefault();
-    // dispatch(loginStart())
-    try {
-      const res = await publicRequest.post("/auth/login", {
-        username,
-        password,
+
+    const email = await currentUser?.user?.email;
+    // console.log(currentUser?.user?.email);
+
+    // Add userType to the database
+    const usertyleCollRef = collection(db, "userTypes");
+    await addDoc(usertyleCollRef, {
+      email: email,
+      type: "student",
+    })
+      .then((e) => {
+        console.log("UserType added to the database");
+        dispatch(userType("student"));
+        navigate("/login");
+      })
+      .catch((e) => {
+        console.log(e);
       });
-      console.log(res.data);
-      dispatch(loginSuccess(res.data));
-    } catch (error) {
-      dispatch(loginFailure(error.response.data.message));
-    }
+  };
+
+  const handleOrganizerClick = async (e) => {
+    e.preventDefault();
+
+    const email = await currentUser?.user?.email;
+    // console.log(currentUser?.user?.email);
+
+    // Add userType to the database
+    const usertyleCollRef = collection(db, "userTypes");
+    await addDoc(usertyleCollRef, {
+      email: email,
+      type: "organizer",
+    })
+      .then((e) => {
+        console.log("UserType added to the database");
+        dispatch(userType("organizer"));
+        navigate("/login");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
@@ -70,16 +101,11 @@ function Type(props) {
               <Button
                 id={props.id}
                 onClick={(e) => {
-                  props?.id === "login"
-                    ? navigate("/login")
-                    : navigate("/register");
+                  handleStudentClick(e);
                 }}
-                disabled={isFetching}
               >
                 {props?.id === "login" ? <>LogIn</> : <>SignUp</>}
               </Button>
-
-              {error && <Error>{error}</Error>}
             </Form>
           </Wrapper>
           <Wrapper>
@@ -103,16 +129,11 @@ function Type(props) {
               <Button
                 id={props.id}
                 onClick={(e) => {
-                  props?.id === "login"
-                    ? navigate("/login")
-                    : navigate("/register");
+                  handleOrganizerClick(e);
                 }}
-                disabled={isFetching}
               >
                 {props?.id === "login" ? <>LogIn</> : <>SignUp</>}
               </Button>
-
-              {error && <Error>{error}</Error>}
             </Form>
           </Wrapper>
         </WrapContainer>

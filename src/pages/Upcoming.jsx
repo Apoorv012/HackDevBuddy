@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import MilitaryTechSharp from "@mui/icons-material/MilitaryTechSharp";
 import BadgeSharpIcon from "@mui/icons-material/BadgeSharp";
 import GroupsSharpIcon from "@mui/icons-material/GroupsSharp";
@@ -28,6 +29,7 @@ function Upcoming() {
   //     dispatch(loginFailure(error.response.data.message));
   //   }
   // };
+  const navigate = useNavigate();
 
   return (
     <>
@@ -52,7 +54,7 @@ function Upcoming() {
                   Location: Uttar Pradesh, India <br />
                 </Text>
               </Top>
-              <Button onClick={(e) => login(e)}>APPLY</Button>
+              <Button onClick={(e) => navigate("/student/exam")}>APPLY</Button>
             </Form>
           </Wrapper>
           <Wrapper>
@@ -72,7 +74,7 @@ function Upcoming() {
                   Location: Uttar Pradesh, India <br />
                 </Text>
               </Top>
-              <Button onClick={(e) => login(e)}>APPLY</Button>
+              <Button onClick={(e) => navigate("/student/exam")}>APPLY</Button>
             </Form>
           </Wrapper>
           <Wrapper>
@@ -91,7 +93,7 @@ function Upcoming() {
                   Location: Uttar Pradesh, India <br />
                 </Text>
               </Top>
-              <Button onClick={(e) => login(e)}>APPLY</Button>
+              <Button onClick={(e) => navigate("/student/exam")}>APPLY</Button>
             </Form>
           </Wrapper>
         </WrapContainer>

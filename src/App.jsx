@@ -35,8 +35,7 @@ function App() {
             )
           }
         />
-        <Route path="/userType/login" element={<Type id="login" />} />
-        <Route path="/userType/register" element={<Type id="register" />} />
+        <Route path="/userType" element={<Type id="login" />} />
         <Route path="/register" element={<Register />} />
         <Route path="/student/exam" element={<Exam />} />
         <Route path="/student/preexam" element={<Preexam />} />

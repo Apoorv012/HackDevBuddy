@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   user: {
-    username : 'sarthak321'
+    email: "apoorvme@my.co",
   },
   isLoading: true,
   type: null,
@@ -16,8 +16,8 @@ export const userSlice = createSlice({
       state.user = action.payload;
       state.isLoading = false;
     },
-    userType : (state,acton)=>{
-      state.type = acton.payload;
+    userType: (state, action) => {
+      state.type = action.payload;
     },
     logoutUser: (state) => {
       state.user = null;
@@ -29,4 +29,5 @@ export const userSlice = createSlice({
   },
 });
 
-export const { loginUser, logoutUser, setLoading, userType } = userSlice.actions;
+export const { loginUser, logoutUser, setLoading, userType } =
+  userSlice.actions;
