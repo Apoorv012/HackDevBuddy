@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  user: null,
+  user: {
+    username : 'sarthak321'
+  },
   isLoading: true,
   type: null,
 };
@@ -13,7 +15,9 @@ export const userSlice = createSlice({
     loginUser: (state, action) => {
       state.user = action.payload;
       state.isLoading = false;
-      state.type = action.payload;
+    },
+    userType : (state,acton)=>{
+      state.type = acton.payload;
     },
     logoutUser: (state) => {
       state.user = null;
@@ -25,4 +29,4 @@ export const userSlice = createSlice({
   },
 });
 
-export const { loginUser, logoutUser, setLoading } = userSlice.actions;
+export const { loginUser, logoutUser, setLoading, userType } = userSlice.actions;

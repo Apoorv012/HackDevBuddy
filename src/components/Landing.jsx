@@ -3,13 +3,59 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import landing from "../images/landing.png";
-function NewsLetter() {
+function Landing(props) {
   const navigate = useNavigate();
 
+  const scrollToUpcoming = (e)=>{
+    e.preventDefault();
+    e.view.window.scrollBy(0,4500)
+  }
+  const scrollToLearnMore = (e)=>{
+    e.preventDefault();
+    e.view.window.scrollBy(0,1000)
+  }
   return (
     <>
       <Container>
         <Wrapper>
+          {props?.user ? 
+          <>
+          <Top>
+            <Left>
+              <Title>
+                Show your <br /> Skills
+              </Title>
+              <Desc>
+                Give these tests to qualify into hackathons.
+              </Desc>
+            </Left>
+            <Right>
+              <Image>
+                <img
+                  src={landing}
+                  style={{
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    objectFit: "contain",
+                  }}
+                />
+              </Image>
+            </Right>
+          </Top>
+          <Bottom>
+            <Bcenter>
+              <Button1 onClick={(e) => scrollToUpcoming(e)}>
+                Get Started
+              </Button1>
+              <Button2 onClick={(e) => {scrollToLearnMore(e)}}>Learn more</Button2>
+            </Bcenter>
+          </Bottom>
+
+
+
+          </>  : 
+          
+          <>
           <Top>
             <Left>
               <Title>
@@ -43,13 +89,20 @@ function NewsLetter() {
               <Button2>Learn more</Button2>
             </Bcenter>
           </Bottom>
+          
+          
+          </>
+          
+          
+          }
+ 
         </Wrapper>
       </Container>
     </>
   );
 }
 
-export default NewsLetter;
+export default Landing;
 
 const Container = styled.div`
   height: 850px;

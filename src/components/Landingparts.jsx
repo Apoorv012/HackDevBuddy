@@ -12,7 +12,7 @@ import {
 function Landingparts(props) {
   return (
     <>
-      {" "}
+      
       {props.card == "1" ? (
         <Container>
           <Bgcolor1>
