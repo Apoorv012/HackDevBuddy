@@ -35,8 +35,8 @@ function Login() {
             <Wrapper>
                 <Title>Log In</Title>
                 <Form>
-                    <Input placeholder='Userame' onChange={(e)=> setemail(e.target.value)}/>
-                    <Input type="email" placeholder='Email' onChange={(e)=> setPassword(e.target.value)}/>
+                    <Input placeholder='Email' onChange={(e)=> setemail(e.target.value)}/>
+                    <Input type="password" placeholder='Password' onChange={(e)=> setPassword(e.target.value)}/>
                     <Extra><Links><input type="checkbox"  /> Remember password                      </Links>
                     <Links>Forgot passoword?</Links>
                     </Extra>
