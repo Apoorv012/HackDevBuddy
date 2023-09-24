@@ -25,8 +25,8 @@ function Type(props) {
     // console.log(currentUser?.user?.email);
 
     // Add userType to the database
-    const usertyleCollRef = collection(db, "userTypes");
-    await addDoc(usertyleCollRef, {
+    const usertypeCollRef = collection(db, "userTypes");
+    await addDoc(usertypeCollRef, {
       email: email,
       type: "student",
     })

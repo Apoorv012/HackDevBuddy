@@ -6,17 +6,23 @@ import { setAnswer } from "../features/answerSlice";
 
 function Option(props) {
   const [checked, setChecked] = useState("");
-  const answer = useSelector((state) => state.data.answer);
+  const answer = useSelector((state) => state.data.answer.answer);
   const dispatch = useDispatch();
+  console.log(answer)
 
   useEffect(() => {
+    let newAnswer = answer.filter((ans) => ans.questionId !== props.id)
+    console.log("before", newAnswer);
+    // Add new entry to newAnswer
+    newAnswer.push({
+      questionId: props?.id,
+      answerId: checked,
+    })
+
+    console.log("after", newAnswer);
+  
     dispatch(
-      setAnswer([...,
-        {
-          questionId: props?.id,
-          answerId: checked,
-        },
-      ])
+      setAnswer(newAnswer)
     );
   }, [checked]);
 
@@ -25,32 +31,32 @@ function Option(props) {
       <Container>
         <Input
           type="radio"
-          value="Java script"
+          value="a"
           onChange={(e) => setChecked(e.target.value)}
-          checked={checked === "Java script"}
+          checked={checked === "a"}
         />
-        <Label for="javascipt">Option1</Label> <br />
+        <Label htmlFor="a">a</Label> <br />
         <Input
           type="radio"
-          value="type script"
+          value="b"
           onChange={(e) => setChecked(e.target.value)}
-          checked={checked === "type script"}
+          checked={checked === "b"}
         />
-        <Label for="typescipt">Option1</Label> <br />
+        <Label htmlFor="b">b</Label> <br />
         <Input
           type="radio"
-          value="hello script"
+          value="c"
           onChange={(e) => setChecked(e.target.value)}
-          checked={checked === "hello script"}
+          checked={checked === "c"}
         />
-        <Label for="helloscipt">Option1</Label> <br />
+        <Label htmlFor="c">c</Label> <br />
         <Input
           type="radio"
-          value="bye script"
+          value="d"
           onChange={(e) => setChecked(e.target.value)}
-          checked={checked === "bye script"}
+          checked={checked === "d"}
         />
-        <Label for="helloscipt">Option1</Label>
+        <Label htmlFor="d">d</Label>
       </Container>
     </>
   );

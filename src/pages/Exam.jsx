@@ -2,11 +2,18 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Question from "../components/Question";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import webgazer from "webgazer";
+import { useNavigate } from "react-router-dom";
+import { db } from "../firebase_configs";
+import { collection, addDoc } from "firebase/firestore";
+
 
 function Exam() {
   const answer = useSelector((state) => state?.data?.answer);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state?.data?.user);
 
   webgazer.saveDataAcrossSessions(true);
   webgazer.showPredictionPoints(true);
@@ -25,9 +32,25 @@ function Exam() {
     })
     .begin();
 
-  const submitAnswer = (e) => {
+  const submitAnswer = async (e) => {
     e.preventDefault();
-    console.log(answer);
+    const email = await currentUser?.user?.email;
+    console.log(answer.answer);
+
+    // Add userType to the database
+    const userAnswerCollRef = collection(db, "userAnswers");
+    await addDoc(userAnswerCollRef, {
+      email: email,
+      answer: answer.answer,
+    })
+      .then((e) => {
+        console.log("UserType added to the database");
+        // dispatch(userType("student"));
+        navigate("/student/result");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
