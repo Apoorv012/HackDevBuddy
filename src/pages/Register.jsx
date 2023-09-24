@@ -3,7 +3,11 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import signupBG from "../images/signupBG.png";
 import firebaseApp from "../firebase_configs";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { Message } from "@mui/icons-material";
 
 function Register() {
@@ -28,6 +32,12 @@ function Register() {
     try {
       if (username === "") {
         setError("Username is required");
+        setTimeout(() => {
+          setError("");
+        }, 2000);
+        // Check if username contains spaces
+      } else if (/\s/.test(username)) {
+        setError("Username should not contain spaces");
         setTimeout(() => {
           setError("");
         }, 2000);
@@ -63,6 +73,17 @@ function Register() {
             // Signed in
             const user = userCredential.user;
             console.log(user);
+
+            updateProfile(auth.currentUser, {
+              displayName: username,
+            })
+              .then(() => {
+                console.log(`Display Name: ${auth.currentUser.displayName}`);
+              })
+              .catch((error) => {
+                console.log(error.code, error.message);
+              });
+
             setError("User Created Successfully");
             setTimeout(() => {
               setError("");
