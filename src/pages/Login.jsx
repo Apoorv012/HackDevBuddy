@@ -8,13 +8,12 @@ import firebaseApp from "../firebase_configs";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser, userType } from "../features/userSlice";
 
-
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const currentUser = useSelector((state) => state.data.user);
-  
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,7 +22,6 @@ function Login() {
     e.preventDefault();
 
     try {
-
       if (email === "") {
         setError("Email is required");
         setTimeout(() => {
@@ -40,15 +38,16 @@ function Login() {
             // Signed in
             const user = userCredential.user;
             console.log(user);
-            dispatch(loginUser({
-              uid : user.uid,
-              email : user.email,
-              username : user.displayName,
-              token : user.accessToken,
-              
-            }))
-            dispatch(userType('student'))
-    
+            dispatch(
+              loginUser({
+                uid: user.uid,
+                email: user.email,
+                username: user.displayName,
+                token: user.accessToken,
+              })
+            );
+            dispatch(userType("student"));
+
             setError("User Sign In Succesful");
             setTimeout(() => {
               setError("");
@@ -63,29 +62,11 @@ function Login() {
             }, 2000);
             // ..
           });
-
       }
     } catch (error) {
       dispatch(loginFailure(error.response.data.message));
     }
-
-
-    
-
-
   };
-
- 
-
-  const postData = (e) => {
-    e.preventDefault()
-
-    try {
-      const res = fetch();
-    } catch {
-      console.log("hi");
-    }
-  }
 
   return (
     <>

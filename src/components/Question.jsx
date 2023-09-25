@@ -8,11 +8,11 @@ function Question(props) {
       <Container>
         <Wrapper>
           <Top>
-            <Qno>Q.1-</Qno>
-            <Qtext>Question</Qtext>
+            <Qno>Q-{props?.question}</Qno>
+            <Qtext>{props?.text}</Qtext>
           </Top>
           <Bottom>
-            <Option id={props?.question} />
+            <Option id={props?.question} options={props?.options} />
           </Bottom>
         </Wrapper>
       </Container>

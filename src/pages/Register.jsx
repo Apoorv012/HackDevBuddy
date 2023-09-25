@@ -77,8 +77,6 @@ function Register() {
           .then(async (userCredential) => {
             // Signed in
             const user = userCredential.user;
-            console.log(user);
-
             dispatch(
               loginUser({
                 uid: user.uid,

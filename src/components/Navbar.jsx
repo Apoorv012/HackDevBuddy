@@ -8,13 +8,22 @@ import {
 } from "@mui/icons-material";
 import { Badge } from "@mui/material";
 import { Link, animateScroll as scroll } from "react-scroll";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from "../features/userSlice";
 
 function Navbar(props) {
   const navigate = useNavigate();
+  const currentUser = useSelector((state) => state?.data?.user);
+  const dispatch = useDispatch();
 
   function scrollToAboutUs(e) {
     e.preventDefault();
     scroll.scrollTo(870);
+  }
+
+  function handleLogOut(e) {
+    e.preventDefault();
+    dispatch(logoutUser());
   }
 
   return (
@@ -29,7 +38,7 @@ function Navbar(props) {
           {props?.user ? (
             <>
               <Text>{props?.user?.username}</Text>
-              <Button3 name="logout" onClick={(e) => handlelogOut(e)}>
+              <Button3 name="logout" onClick={(e) => handleLogOut(e)}>
                 Logout
               </Button3>
             </>

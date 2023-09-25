@@ -8,12 +8,22 @@ import { useNavigate } from "react-router-dom";
 import { db } from "../firebase_configs";
 import { collection, addDoc } from "firebase/firestore";
 
-
 function Exam() {
   const answer = useSelector((state) => state?.data?.answer);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state?.data?.user);
+
+  const [numOutOfFrame, setNumOutOfFrame] = React.useState(0);
+  const [numLookedAway, setNumLookedAway] = React.useState(0);
+
+  function addOneToNumOutOfFrame() {
+    setNumOutOfFrame(numOutOfFrame + 1);
+  }
+
+  function addOneToNumLookedAway() {
+    setNumLookedAway(numLookedAway + 1);
+  }
 
   webgazer.saveDataAcrossSessions(true);
   webgazer.showPredictionPoints(true);
@@ -26,16 +36,19 @@ function Exam() {
       if (data == null) {
         return;
       }
-      const xPrediction = data.x;
-      const yPrediction = data.y;
-      // console.log(data);
+
+      if (data.x < 50 || data.x > 1400) {
+        addOneToNumLookedAway();
+      }
+      if (!webgazer.faceInFrame) {
+        addOneToNumOutOfFrame();
+      }
     })
     .begin();
 
   const submitAnswer = async (e) => {
     e.preventDefault();
     const email = await currentUser?.user?.email;
-    console.log(answer.answer);
 
     // Add userType to the database
     const userAnswerCollRef = collection(db, "userAnswers");
@@ -60,8 +73,8 @@ function Exam() {
           <Cam></Cam>
           <Warning>
             <Title2>Warning!</Title2>
-            <Text2>Number of times looked away: 8</Text2>
-            <Text2>Max limit: 10</Text2>
+            <Text2>No. of times out of frame: {numOutOfFrame}</Text2>
+            <Text2>No. of times looked away: {numLookedAway}</Text2>
             <Button onClick={() => webgazer.clearData()}>Recalibrate</Button>
           </Warning>
           {/* A button to recalibrate the data for webgazer's regression model */}
@@ -76,16 +89,52 @@ function Exam() {
               <Text>Time Duration(any)</Text>
             </Container1>
             <Containerb>
-              <Question question="1" />
+              <Question
+                question="1"
+                text="Which of the following is a correct variable name in Python?"
+                options={{
+                  a: "my-string_1",
+                  b: "_my_string",
+                  c: "1st_string",
+                  d: "foo$",
+                }}
+              />
             </Containerb>
             <Containery>
-              <Question question="2" />
+              <Question
+                question="2"
+                text="Which of the following is used to handle exceptions in Python?"
+                options={{
+                  a: "try",
+                  b: "except",
+                  c: "finally",
+                  d: "All of the above",
+                }}
+              />
             </Containery>
             <Containerb>
-              <Question question="3" />
+              <Question
+                question="3"
+                text="What is the output of print(3 ** 2 * 2 // 3) in Python?"
+                options={{
+                  a: "9.0",
+                  b: "6",
+                  c: "9",
+                  d: "6.0",
+                }}
+              />
             </Containerb>
             <Containery>
-              <Question question="4" />
+              <Question
+                question="4"
+                text='What is the output of the code print("Python"[::-1])?'
+                options={{
+                  a: "nohtyP",
+                  b: "Python",
+                  c: "pythoN",
+                  d: "None of the above",
+                }}
+              />
             </Containery>
 
             <Submit type="submit" onClick={(e) => submitAnswer(e)}>

@@ -10,11 +10,11 @@ function Landing(props) {
 
   const scrollToUpcoming = (e) => {
     e.preventDefault();
-    e.view.window.scrollBy(0, 4500);
+    scroll.scrollTo(4150);
   };
   const scrollToLearnMore = (e) => {
     e.preventDefault();
-    e.view.window.scrollBy(0, 1000);
+    scroll.scrollTo(1000);
   };
 
   function scrollToAboutUs(e) {
