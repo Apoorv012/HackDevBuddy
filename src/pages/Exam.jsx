@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Question from "../components/Question";
 import styled from "styled-components";
@@ -13,6 +13,8 @@ function Exam() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state?.data?.user);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [isFirstTime, setIsFirstTime] = React.useState(true);
 
   const [numOutOfFrame, setNumOutOfFrame] = React.useState(0);
   const [numLookedAway, setNumLookedAway] = React.useState(0);
@@ -21,27 +23,39 @@ function Exam() {
     setNumOutOfFrame(numOutOfFrame + 1);
   }
 
-  function addOneToNumLookedAway() {
-    setNumLookedAway(numLookedAway + 1);
+  async function addOneToNumLookedAway() {
+    await setNumLookedAway(numLookedAway + 1);
   }
 
-  webgazer.saveDataAcrossSessions(true);
-  webgazer.showPredictionPoints(true);
+  webgazer.saveDataAcrossSessions(false);
+  webgazer.showPredictionPoints(false);
   webgazer.showVideo(true);
+
   try {
-    webgazer.setVideoViewerSize(400, 300);
-  } catch (error) {}
+    // webgazer.setVideoViewerSize(400, 300);
+  } catch (error) {
+    console.log(error);
+  }
+
+  // const intervalForOutOfFrame = setInterval(async () => {
+  //   if (!isLoading) {
+  //     if (!webgazer.faceInFrame) {
+  //       addOneToNumOutOfFrame();
+  //     }
+  //   }
+  // }, 500);
+
   webgazer
-    .setGazeListener(function (data, elapsedTime) {
+    .setGazeListener(async function (data, elapsedTime) {
       if (data == null) {
         return;
+      } else if (isFirstTime) {
+        setIsLoading(false);
+        setIsFirstTime(false);
       }
 
-      if (data.x < 50 || data.x > 1400) {
-        addOneToNumLookedAway();
-      }
-      if (!webgazer.faceInFrame) {
-        addOneToNumOutOfFrame();
+      if (data.x < 150 || data.x > 1300) {
+        await addOneToNumLookedAway();
       }
     })
     .begin();
@@ -49,6 +63,9 @@ function Exam() {
   const submitAnswer = async (e) => {
     e.preventDefault();
     const email = await currentUser?.user?.email;
+    // clearInterval(intervalForOutOfFrame);
+    // Close webgazer
+    webgazer.end();
 
     // Add userType to the database
     const userAnswerCollRef = collection(db, "userAnswers");
@@ -73,20 +90,22 @@ function Exam() {
           <Cam></Cam>
           <Warning>
             <Title2>Warning!</Title2>
-            <Text2>No. of times out of frame: {numOutOfFrame}</Text2>
-            <Text2>No. of times looked away: {numLookedAway}</Text2>
+            {/* <Text2>No. of times out of frame: {numOutOfFrame}</Text2> */}
+            <Text2>
+              No. of times looked away: {Math.floor(numLookedAway / 5)}
+            </Text2>
             <Button onClick={() => webgazer.clearData()}>Recalibrate</Button>
           </Warning>
           {/* A button to recalibrate the data for webgazer's regression model */}
 
-          <Text3>Time Left - 09:59min</Text3>
+          <Text3>Time Left - 10:00 min</Text3>
         </Record>
         <Form typeof="submit">
           <Wrapper>
             <Container1>
-              <Title>Exam Name</Title>
-              <Text>About the Exam(Description)</Text>
-              <Text>Time Duration(any)</Text>
+              <Title>Basics of Python</Title>
+              <Text>This test will check your python basics</Text>
+              <Text>10:00 mins</Text>
             </Container1>
             <Containerb>
               <Question
@@ -170,7 +189,6 @@ const Cam = styled.div`
   background-color: #f1f0e8;
   width: 20vw;
   height: 30%;
-  border: dotted red;
   margin-top: 2%;
   margin-left: -2px;
 
