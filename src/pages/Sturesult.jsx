@@ -21,7 +21,7 @@ function Sturesult() {
       <WrapContainer src={Result}>
         <Body>
           <Vertical>
-            <Logo>LOGO</Logo>
+            <SKILLER>SKILLER</SKILLER>
             <Ribbon>
               <Title>Test Report</Title>
               <Text1>{currentUser?.user?.username}</Text1>
@@ -50,7 +50,7 @@ function Sturesult() {
                 </TwoDiv>
                 <TwoDiv>
                   <Text3>
-                    Number of Attepted <br /> Questions
+                    Number of Attempted <br /> Questions
                   </Text3>
                   <Marks2>4</Marks2>
                 </TwoDiv>
@@ -116,7 +116,7 @@ const Vertical = styled.div`
   height: 104vh;
 `;
 
-const Logo = styled.h1`
+const SKILLER = styled.h1`
   margin-top: 0px;
   padding-top: 10%;
   margin-left: 10%;
@@ -215,10 +215,11 @@ const BottomDiv = styled.div`
 `;
 
 const Text2 = styled.p`
-  font-size: 15px;
+  font-size: 35px;
   letter-spacing: 2px;
-  margin-left: 5%;
+  margin-left: 4%;
   margin-top: -2%;
+  font-weight: 500;
 `;
 const Heading = styled.h1`
   font-size: 50px;
@@ -246,5 +247,6 @@ const Marks2 = styled.p`
   margin-right: 7%;
   letter-spacing: 3px;
   text-align: right;
-  margin-top: -4%;
+  margin-top: -6%;
+  margin-bottom: 2%;
 `;

@@ -121,6 +121,7 @@ const Wrapper = styled.div`
 
   justify-content: center;
   border-radius: 5%;
+  padding-bottom: 5%;
 `;
 const Title = styled.h1`
   margin-top: 10%;

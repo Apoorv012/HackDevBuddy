@@ -12,7 +12,6 @@ import {
 function Landingparts(props) {
   return (
     <>
-      
       {props.card == "1" ? (
         <Container>
           <Bgcolor1>
@@ -164,7 +163,6 @@ const Margin = styled.div`
   margin-top: 5%;
 `;
 const Bgcolor1 = styled.div`
-  background-color: #edefff;
   margin-top: -5%;
 
   padding-top: 2%;
@@ -172,7 +170,7 @@ const Bgcolor1 = styled.div`
 `;
 const Bgcolor2 = styled.div`
   margin-top: -12%;
-
+  background-color: #edefff;
   padding-top: 1px;
   padding-bottom: 5%;
 `;

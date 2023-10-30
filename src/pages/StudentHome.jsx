@@ -21,7 +21,7 @@ function StudentHome() {
       <Landingparts title="How to Prepare" card="2" />
       <Landingparts title="Avoid the Following" card="3" />
       <Upcoming />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

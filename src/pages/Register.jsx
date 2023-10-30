@@ -189,7 +189,10 @@ const Wrapper = styled.div`
   background-color: white;
   width: 30vw;
   padding: 20px;
-
+  padding-bottom: 7%;
+  margin-bottom: 10%;
+  padding-top: 5%;
+  margin-top: 4%;
   height: 90%;
 
   justify-content: center;
@@ -252,7 +255,7 @@ const Error = styled.span`
 `;
 const Extra = styled.div`
   margin-left: -1%;
-
+  margin-top: -2%;
   display: flex;
   justify-content: space-evenly;
 `;

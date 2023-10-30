@@ -31,13 +31,13 @@ function Navbar(props) {
       <Ribbon></Ribbon>
       <Wrapper>
         <Left>
-          <Logo>DevProctor</Logo>
+          <Logo>SKILLER</Logo>
         </Left>
         <Center></Center>
         <Right>
           {props?.user ? (
             <>
-              <Text>{props?.user?.username}</Text>
+              <h1>{props?.user?.username}</h1>
               <Button3 name="logout" onClick={(e) => handleLogOut(e)}>
                 Logout
               </Button3>
@@ -232,3 +232,8 @@ const Ribbon = styled.div`
     
 `;
 const Text = styled.span``;
+
+const Text5 = styled.span`
+  text-align: right;
+  margin-right: -100px;
+`;

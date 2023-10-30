@@ -44,6 +44,8 @@ function App() {
           element={
             currentUser?.type === "organizer" ? (
               <OrganizerHome />
+            ) : currentUser?.type === "student" ? (
+              <StudentHome />
             ) : (
               <StudentHome />
             )

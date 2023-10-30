@@ -126,14 +126,14 @@ function Type(props) {
                   Support from our team <br />
                 </Text>
               </Top>
-              <Button
+              <Button2
                 id={props.id}
                 onClick={(e) => {
                   handleOrganizerClick(e);
                 }}
               >
                 {props?.id === "login" ? <>LogIn</> : <>SignUp</>}
-              </Button>
+              </Button2>
             </Form>
           </Wrapper>
         </WrapContainer>
@@ -223,6 +223,26 @@ const Button = styled.button`
   border-radius: 50px 50px 50px 50px;
   margin-bottom: 5%;
 `;
+const Button2 = styled.button`
+  margin-top: 10%;
+  color: white;
+  cursor: pointer;
+  width: 500px;
+  font-size: 20px;
+  padding: 20px 15px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  background-color: ${(props) => (props?.id === "login" ? "#FEB442" : "blue")};
+  border: none;
+  &:disabled {
+    color: teal;
+    cursor: not-allowed;
+  }
+  border-radius: 50px 50px 50px 50px;
+  margin-bottom: 5%;
+  margin-top: 25%;
+`;
+
 const Links = styled.div`
   font-size: 15px;
   cursor: pointer;

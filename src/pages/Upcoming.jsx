@@ -136,6 +136,8 @@ const Wrapper = styled.div`
   justify-content: center;
   border-radius: 5%;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  padding-bottom: 5%;
+  padding-left: 3%;
 `;
 
 const Title = styled.h1`
