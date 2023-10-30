@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import Result from "../images/result.png";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import firebaseApp from "../firebase_configs";
-import { useSelector, useDispatch } from "react-redux";
 
 function Sturesult() {
   const [email, setEmail] = useState("");
@@ -14,7 +13,47 @@ function Sturesult() {
   // const { isFetching, error } = useSelector((state) => state.user);
   // const dispatch = useDispatch();
   const navigate = useNavigate();
-  const currentUser = useSelector((state) => state?.data?.user);
+
+  const auth = getAuth(firebaseApp);
+
+  const login = async (e) => {
+    e.preventDefault();
+    try {
+      if (email === "") {
+        setError("Email is required");
+        setTimeout(() => {
+          setError("");
+        }, 2000);
+      } else if (password === "") {
+        setError("Password is required");
+        setTimeout(() => {
+          setError("");
+        }, 2000);
+      } else {
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log(user);
+            setError("User Sign In Succesful");
+            setTimeout(() => {
+              setError("");
+            }, 2000);
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            setError(errorMessage);
+            setTimeout(() => {
+              setError("");
+            }, 2000);
+            // ..
+          });
+      }
+    } catch (error) {
+      dispatch(loginFailure(error.response.data.message));
+    }
+  };
 
   return (
     <>
@@ -24,11 +63,11 @@ function Sturesult() {
             <Logo>LOGO</Logo>
             <Ribbon>
               <Title>Test Report</Title>
-              <Text1>{currentUser?.user?.username}</Text1>
+              <Text1>Name</Text1>
             </Ribbon>
 
             <Top>
-              <Text onClick={(e) => navigate("/home")}>Dashboard</Text>
+              <Text>Dashboard</Text>
             </Top>
             <Bottom>
               <Text>Settings</Text>
@@ -39,22 +78,36 @@ function Sturesult() {
             <div>
               <TopDiv>
                 <Heading>
-                  Your result will be out <br /> soon.
+                  Your Total <br />
+                  Score
                 </Heading>
                 <Text2>Based on the answers you gave</Text2>
+                <Marks>15/20</Marks>
               </TopDiv>
               <TwoDivsContainer>
                 <TwoDiv>
-                  <Text3>Number of Questions</Text3>
-                  <Marks2>4</Marks2>
+                  <Text3>
+                    Number of <br /> Answers Correct
+                  </Text3>
+                  <Marks2>15/20</Marks2>
                 </TwoDiv>
                 <TwoDiv>
                   <Text3>
-                    Number of Attepted <br /> Questions
+                    Number of <br />
+                    Answers Wrong
                   </Text3>
-                  <Marks2>4</Marks2>
+                  <Marks2>15/20</Marks2>
                 </TwoDiv>
               </TwoDivsContainer>
+              <Division2>
+                <BottomDiv>
+                  <Text3>
+                    Questions not <br />
+                    Attempted
+                  </Text3>
+                  <Marks2>15/20</Marks2>
+                </BottomDiv>
+              </Division2>
             </div>
           </Division>
         </Body>
@@ -121,48 +174,16 @@ const Logo = styled.h1`
   padding-top: 10%;
   margin-left: 10%;
 `;
-const Text = styled.button`
-  align-items: center;
-  appearance: none;
-  background-color: #0e21a0;
-  background-size: calc(100% + 20px) calc(100% + 20px);
-  border-radius: 100px;
-  border-width: 0;
-  box-shadow: none;
-  box-sizing: border-box;
-  color: #ffffff;
-  cursor: pointer;
-  display: inline-flex;
-  font-family: CircularStd, sans-serif;
-  font-size: 1rem;
-  height: auto;
-  justify-content: center;
-  line-height: 1.5;
-  padding: 10px 80px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  transition: background-color 0.2s, background-position 0.2s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: top;
-  white-space: nowrap;
-
-  margin-left: -3.5%;
-  font-size: 20px;
-  margin-top: 3%;
-`;
+const Text = styled.p``;
 const Text1 = styled.p`
   margin-right: 10%;
 `;
 
 const Bottom = styled.div`
-  margin-top: 150%;
+  margin-top: 220%;
   text-align: center;
 `;
 const Top = styled.div`
-  pointer: cursor;
   margin-top: 0px;
   text-align: center;
   margin-top: 20%;
